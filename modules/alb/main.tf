@@ -1,12 +1,12 @@
 resource "aws_lb" "photoshare_alb" {
   name               = var.alb_name
   internal           = false
-  load_balancer_type = "application"
+  load_balancer_type = var.load_balancer_type
   security_groups    = [aws_security_group.photoshare_alb_securitygroup.id]
   subnets            = var.public_subnet_ids
-  ip_address_type = "ipv4"
+  ip_address_type    = var.ip_address_type
 
-  enable_deletion_protection = false
+  enable_deletion_protection = var.enable_deletion_protection
 
   tags = {
     Name = var.alb_name
@@ -15,8 +15,8 @@ resource "aws_lb" "photoshare_alb" {
 
 resource "aws_lb_target_group" "photoshare_alb_targetgroup" {
   name     = var.targetgroup_name
-  port     = 80
-  protocol = "HTTP"
+  port     = var.targetgroup_port
+  protocol = var.targetgroup_protocol
   vpc_id   = var.vpc_id
 
   health_check {

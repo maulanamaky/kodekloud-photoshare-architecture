@@ -56,14 +56,14 @@ resource "aws_cloudwatch_dashboard" "photoshare_metric_dashboard" {
 
 resource "aws_cloudwatch_metric_alarm" "photoshare_alarm_metric_lambda" {
   alarm_name                = var.lambda_alarm_name
-  comparison_operator       = "GreaterThanThreshold"
-  evaluation_periods        = 1
-  metric_name               = "Errors"
-  namespace                 = "AWS/Lambda"
-  period                    = 60
-  statistic                 = "Sum"
-  threshold                 = 0
-  alarm_description         = "This metric monitors lambda function"
+  comparison_operator       = var.comparison_operator
+  evaluation_periods        = var.evaluation_periods
+  metric_name               = var.metric_name
+  namespace                 = var.namespace
+  period                    = var.period
+  statistic                 = var.statistic
+  threshold                 = var.threshold
+  alarm_description         = var.alarm_description
   
   dimensions = {
     FunctionName = var.lambda_function_name

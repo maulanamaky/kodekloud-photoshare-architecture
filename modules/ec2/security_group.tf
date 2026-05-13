@@ -9,11 +9,11 @@ resource "aws_security_group" "photoshare_ec2_securitygroup" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "photoshare_ec2_securitygroup_allow_http" {
-  security_group_id = aws_security_group.photoshare_ec2_securitygroup.id
+  security_group_id            = aws_security_group.photoshare_ec2_securitygroup.id
   referenced_security_group_id = var.alb_securitygroup_id
-  from_port         = 80
-  ip_protocol       = "tcp"
-  to_port           = 80
+  from_port                    = 80
+  ip_protocol                  = "tcp"
+  to_port                      = 80
 }
 
 resource "aws_vpc_security_group_ingress_rule" "photoshare_ec2_securitygroup_allow_ssh" {
@@ -26,6 +26,6 @@ resource "aws_vpc_security_group_ingress_rule" "photoshare_ec2_securitygroup_all
 
 resource "aws_vpc_security_group_egress_rule" "photoshare_ec2_securitygroup_allow_egress_ec2" {
   security_group_id = aws_security_group.photoshare_ec2_securitygroup.id
-  cidr_ipv4   = "0.0.0.0/0"
-  ip_protocol = "-1"
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
 }
